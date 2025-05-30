@@ -1,0 +1,12 @@
+
+
+**Database Name: invoicemgsys**
+
+
+
+**Login Details**
+
+Username: admin
+Password: Password@123
+
+

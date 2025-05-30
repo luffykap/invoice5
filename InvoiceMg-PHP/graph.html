@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .stat-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            width: 30%;
+            background-color: #f9f9f9;
+        }
+        canvas {
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <div class="stats">
+        <div class="stat-card">
+            <h3>Total Sales</h3>
+            <p id="totalSales">$0.00</p>
+        </div>
+        <div class="stat-card">
+            <h3>Overdue Invoices</h3>
+            <p id="overdueCount">0</p>
+        </div>
+    </div>
+    <canvas id="salesChart" width="400" height="200"></canvas>
+
+    <script>
+        // Simulated data placeholders (replace with API or dynamic backend data)
+        const totalSales = 15000.75; // Replace with dynamic data
+        const overdueCount = 5;     // Replace with dynamic data
+        const monthlySales = [
+            { month: 'January', total: 4000 },
+            { month: 'February', total: 3000 },
+            { month: 'March', total: 5000 },
+            { month: 'April', total: 3500 }
+        ];
+
+        // Insert data into HTML elements
+        document.getElementById('totalSales').textContent = `$${totalSales.toLocaleString()}`;
+        document.getElementById('overdueCount').textContent = overdueCount;
+
+        // Prepare data for the chart
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        const data = {
+            labels: monthlySales.map(item => item.month), // Months
+            datasets: [{
+                label: 'Monthly Sales',
+                data: monthlySales.map(item => item.total), // Totals
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        // Create the chart
+        new Chart(ctx, config);
+    </script>
+</body>
+</html>
